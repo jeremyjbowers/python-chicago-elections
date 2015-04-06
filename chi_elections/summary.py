@@ -55,7 +55,7 @@ class FixedWidthParser(object):
         for field in self._fields:
             attrs[field.name] = field.parse(line)
 
-        return attrs 
+        return attrs
 
 
 class ResultParser(FixedWidthParser):
@@ -94,7 +94,7 @@ class Result(object):
         self.vote_total = vote_total
 
     def __str__(self):
-        return "{}: {}d".format(self.name, self.vote_total)
+        return "{}: {}d".format(self.full_name, self.vote_total)
 
 
 class Race(object):
@@ -120,7 +120,7 @@ class SummaryParser(object):
             parsed = self._result_parser.parse_line(line)
             race = self.get_or_create_race(parsed)
             result = Result(
-                candidate_number=parsed['candidate_number'],    
+                candidate_number=parsed['candidate_number'],
                 vote_total=parsed['vote_total'],
                 party=parsed['party'],
                 race=race,
@@ -128,7 +128,7 @@ class SummaryParser(object):
                 reporting_unit_name=parsed['reporting_unit_name'],
             )
             race.candidates.append(result)
-    
+
     def get_or_create_race(self, attrs):
         try:
             race = self._race_lookup[attrs['contest_code']]
@@ -142,7 +142,7 @@ class SummaryParser(object):
             )
             self._race_lookup[attrs['contest_code']] = race
             self.races.append(race)
-        
+
         return race
 
     def parse_line(self, line):
