@@ -59,18 +59,20 @@ class FixedWidthParser(object):
 
 
 class ResultParser(FixedWidthParser):
-    # Summary Export File Format           Length    Column Position
-    # Contest Code                         4         1-4
-    # Candidate Number                     3         5-7
-    # # of Eligible Precincts              4         8-11
-    # Votes                                7         12-18
-    # # Completed precincts                4         19-22
-    # Party Abbreviation                   3         23-25
-    # Political Subdivision Abbreviation   7         26-32
-    # Contest name                         56        33-88
-    # Candidate Name                       38        89-126
-    # Political subdivision name           25        127-151
-    # Vote For                             3         152-154
+    """
+    Summary Export File Format           Length    Column Position
+    Contest Code                         4         1-4
+    Candidate Number                     3         5-7
+    # of Eligible Precincts              4         8-11
+    Votes                                7         12-18
+    # Completed precincts                4         19-22
+    Party Abbreviation                   3         23-25
+    Political Subdivision Abbreviation   7         26-32
+    Contest name                         56        33-88
+    Candidate Name                       38        89-126
+    Political subdivision name           25        127-151
+    Vote For                             3         152-154
+    """
     contest_code = FixedWidthField(0, 4, transform=int)
     candidate_number = FixedWidthField(4, 3, transform=int)
     precincts_total = FixedWidthField(7, 4, transform=int)
@@ -103,6 +105,8 @@ class Race(object):
         self.contest_code = contest_code
         self.name = name
         self.candidates = []
+        self.precincts_reporting = precincts_reporting
+        self.precincts_total = precincts_total
 
     def __str__(self):
         return self.name
