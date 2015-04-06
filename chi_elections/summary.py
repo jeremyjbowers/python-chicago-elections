@@ -94,7 +94,7 @@ class Result(object):
         self.vote_total = vote_total
 
     def __str__(self):
-        return "{}: {}d".format(self.full_name, self.vote_total)
+        return "{}: {}".format(self.full_name, self.vote_total)
 
 
 class Race(object):
